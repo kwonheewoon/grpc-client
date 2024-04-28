@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package pb.svc.test;
+option java_package="org.khw.brand.test";
+option java_multiple_files=true;
+
+
+service Brand {
+  rpc FindBrandByName(BrandReq) returns (BrandRes);
+}
+
+message BrandReq {
+  string name = 1;
+}
+
+message BrandRes {
+  string name = 1;
+  string explanation = 2;
+  int32 foundedYear = 3;
+  string displayFlag = 4;
+}
