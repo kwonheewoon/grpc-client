@@ -7,10 +7,17 @@ option java_multiple_files=true;
 
 service Brand {
   rpc FindBrandByName(BrandReq) returns (BrandRes);
+
+  // 클라이언트/서버 스트리밍 메소드
+  rpc FindBrandByNameClientServerStreaming(stream BrandReq) returns (stream BrandRes);
+
+  // 서버 스트리밍 메소드
+  rpc FindBrandByNameServerStreaming(BrandReq) returns (stream BrandRes);
 }
 
 message BrandReq {
   string name = 1;
+  int32 foundedYear = 2;
 }
 
 message BrandRes {
