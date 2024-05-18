@@ -2,6 +2,7 @@ package org.khw.grpcclient.brand
 
 import lombok.RequiredArgsConstructor
 import org.khw.brand.test.BrandRes
+import org.khw.grpcclient.brand.dto.BrandResDto
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
@@ -21,13 +22,18 @@ class BrandRestController(
         brandService.findBrandByName(name)
     }
 
+    @GetMapping("/client-stream")
+    fun findBrandByNames(@RequestBody brandReqeust: BrandReqeust) {
+        brandService.findBrandsByNames2(brandReqeust)
+    }
+
     @GetMapping("/{foundedYear}")
-    fun findBrandsByFoundedYear(@PathVariable foundedYear: Int): List<BrandRes> {
+    fun findBrandsByFoundedYear(@PathVariable foundedYear: Int): List<BrandResDto> {
         return brandService.findBrandsByFoundedYear(foundedYear)
     }
 
-    @GetMapping("/stream")
-    fun findBrandsByNames(@RequestBody brandReqeust: BrandReqeust) {
-        brandService.findBrandsByNames(brandReqeust)
+    @GetMapping("/server-stream")
+    fun findBrandsByNames(@RequestParam names: List<String>) {
+        brandService.findBrandsByNames(names)
     }
 }
